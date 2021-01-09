@@ -4,29 +4,43 @@ class TasksController < ApplicationController
     @tasks = Task.all
   end
 
-  # def new
+  def new
+    @task = Task.new
+  end
 
-  # end
-
-  # def create
-
-  # end
+  def create
+    @task = Task.new(task_param)
+    @task.save
+    # Will raise ActiveModel::ForbiddenAttributesError
+    # no need for app/views/restaurants/create.html.erb
+    redirect_to tasks_path(@task)
+  end
 
   def show
     @task = Task.find(params[:id])
   end
 
-  # def edit
+  def edit
+    @task = Task.find(params[:id])
+  end
 
-  # end
+  def update
+    @task = Task.find(params[:id])
+    @task.update(task_param)
+    # Will raise ActiveModel::ForbiddenAttributesError
+    redirect_to tasks_path(@task)
+  end
 
-  # def update
+  def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
 
-  # end
-
-  # def destroy
-
-  # end
+    redirect_to tasks_path
+  end
 
   private
+
+  def task_param
+    params.require(:task).permit(:title, :details)
+  end
 end

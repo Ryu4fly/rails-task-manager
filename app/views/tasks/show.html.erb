@@ -1,5 +1,7 @@
 <h1><%= @task.title %></h1>
 
+<%= link_to('Update this take', edit_task_path) %>
+
 <p><%= @task.details %></p>
 
 <p><%= @task.completed ? '[X] This task is completed' : '[ ] This task is not completed' %></p>

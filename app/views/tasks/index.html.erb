@@ -2,6 +2,11 @@
 
 <ul>
   <% @tasks.each do |task| %>
-    <li><%= task.completed ? '[X]':'[ ]' %><%= link_to("#{task.title}", "tasks/#{task.id}") %></li>
+    <li><%= task.completed ? '[X]':'[ ]' %><%= link_to("#{task.title}", "tasks/#{task.id}") %> <%= link_to "Delete",
+            task_path(task),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %></li>
   <% end %>
 </ul>
+
+<%= link_to('Create a new task', new_task_path) %>
